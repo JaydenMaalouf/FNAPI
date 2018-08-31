@@ -28,13 +28,13 @@ namespace FortniteAPI.Classes
             return Items.FindAll(x => x.Featured == false);
         }
         
-        public async Task<List<FNBRItem>> SearchAsync(string name, FNBRItemRarity? rarity = null)
+        public async Task<List<FNBRSearchItem>> SearchAsync(string name, FNBRItemRarity? rarity = null)
         {
             var content = await FNAPI.SendWebRequestAsync("https://fortnite-public-files.theapinetwork.com/search?query=name:" + name + (rarity != null ? ";rarity:" + rarity.ToString().ToLower() : "")).ConfigureAwait(false);
 
             try
             {
-                return JsonConvert.DeserializeObject<List<FNBRItem>>(content);
+                return JsonConvert.DeserializeObject<List<FNBRSearchItem>>(content);
             }
             catch
             {

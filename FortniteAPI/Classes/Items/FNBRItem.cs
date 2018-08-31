@@ -1,11 +1,7 @@
 ﻿using System.Drawing;
-using System.Threading.Tasks;
 using System.Collections.Generic;
 
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-
-using RestSharp;
 
 using FortniteAPI.Enums;
 using FortniteAPI.Interfaces;
@@ -22,24 +18,9 @@ namespace FortniteAPI.Classes.Items
         public FNBRItemRarity Rarity { get; internal set; }
 
         [JsonProperty]
-        public FNBRItemObtained Obtained { get; internal set; }
-        [JsonProperty]
         public FNItemImages Images { get; internal set; }
-        
-        public async Task<FNBRItemOccurrences> GetOccurencesAsync()
-        {
-            var request = new RestRequest("item/get", Method.POST);
-            request.AddHeader("Authorization", FNAPI.APIKey);
-            request.AddParameter("ids", ItemID);
-
-            IRestResponse response = await FNAPI.SendRestRequestAsync(request).ConfigureAwait(false);
-            if (response.ResponseStatus != ResponseStatus.Completed)
-            {
-                return null;
-            }
-
-            return JObject.Parse(response.Content)["occurrences"].ToObject<FNBRItemOccurrences>();
-        }
+        [JsonProperty]
+        public FNBRItemOccurrences Occurences { get; internal set; }
 
         public Color GetRarityColor()
         {
@@ -58,17 +39,7 @@ namespace FortniteAPI.Classes.Items
             return Color.FromArgb(96, 170, 58);
         }
     }
-
-    public class FNBRItemObtained
-    {
-        internal FNBRItemObtained() { }
-
-        [JsonProperty]
-        public string Obtained { get; internal set; }
-        [JsonProperty]
-        public FNBRItemObtainedType Type { get; internal set; }
-    }
-
+    
     public class FNBRItemOccurrences
     {
         internal FNBRItemOccurrences() { }
