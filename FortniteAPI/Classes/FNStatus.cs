@@ -6,6 +6,8 @@ namespace FortniteAPI.Classes
 {
     public class FNStatus
     {
+        internal FNStatus() { }
+
         [JsonProperty]
         public FNStatusType Status { get; internal set; }
         [JsonProperty]

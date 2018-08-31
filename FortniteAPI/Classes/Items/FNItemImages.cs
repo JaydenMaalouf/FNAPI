@@ -4,6 +4,8 @@ namespace FortniteAPI.Classes.Items
 {
     public class FNItemImages
     {
+        internal FNItemImages() { }
+
         [JsonProperty]
         public string Icon { get; internal set; }
         [JsonProperty]

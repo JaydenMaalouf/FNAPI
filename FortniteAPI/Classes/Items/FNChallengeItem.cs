@@ -7,6 +7,8 @@ namespace FortniteAPI.Classes.Items
 {
     public class FNChallengeItem : IFNItem
     {
+        internal FNChallengeItem() { }
+
         [JsonProperty("Identifier")]
         [JsonConverter(typeof(UIDConverter))]
         public UID ItemID { get; internal set; }

@@ -8,6 +8,8 @@ namespace FortniteAPI.Classes.Items
 {
     public class FNBRStoreItem : FNItem
     {
+        internal FNBRStoreItem() { }
+
         [JsonProperty]
         public string Cost { get; internal set; }
         [JsonProperty]

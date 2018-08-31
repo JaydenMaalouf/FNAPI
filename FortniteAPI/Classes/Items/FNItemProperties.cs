@@ -7,6 +7,8 @@ namespace FortniteAPI.Classes.Items
 {
     public class FNItemProperties : IFNItemProperties
     {
+        internal FNItemProperties() { }
+
         [JsonProperty("type")]
         public FNBRItemType ItemType { get; internal set; }
         [JsonProperty]

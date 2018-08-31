@@ -7,11 +7,10 @@ using Newtonsoft.Json;
 
 using FortniteAPI.Enums;
 using FortniteAPI.Interfaces;
-using FortniteAPI.Extensions;
 
 namespace FortniteAPI.Classes
 {
-    public class FNUser : FNExtensions, IFNUser
+    public class FNUser : IFNUser
     {
         [JsonProperty]
         [JsonConverter(typeof(UIDConverter))]
@@ -30,11 +29,11 @@ namespace FortniteAPI.Classes
         private UID ID { set { UserID = value; } }
 
         [JsonProperty]
-        private string displayName { set { Username = value; } }
+        private string DisplayName { set { Username = value; } }
 
-        public FNUser() { }
+        internal FNUser() { }
 
-        public FNUser(UID uid, string username, List<FNPlatform> platforms)
+        internal FNUser(UID uid, string username, List<FNPlatform> platforms)
         {
             UserID = uid;
             Username = username;
@@ -45,7 +44,7 @@ namespace FortniteAPI.Classes
         {
             var request = new RestRequest("users/id", Method.POST);
             request.AddParameter("username", username);
-            IRestResponse response = FNAPI.SendRequest(request);
+            IRestResponse response = FNAPI.SendRestRequestAsync(request).Result;
             if (response.ResponseStatus != ResponseStatus.Completed)
             {
                 return;
@@ -58,7 +57,7 @@ namespace FortniteAPI.Classes
         {
             var request = new RestRequest("users/username out of id", Method.POST);
             request.AddParameter("ids[0]", userID.GetUID());
-            IRestResponse response = FNAPI.SendRequest(request);
+            IRestResponse response = FNAPI.SendRestRequestAsync(request).Result;
             if (response.ResponseStatus != ResponseStatus.Completed)
             {
                 return;

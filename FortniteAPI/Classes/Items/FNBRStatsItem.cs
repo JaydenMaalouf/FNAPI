@@ -1,10 +1,13 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
+
+using Newtonsoft.Json;
 
 namespace FortniteAPI.Classes.Items
 {
     public class FNBRStatsItem
     {
+        internal FNBRStatsItem() { }
+
         [JsonProperty]
         public int Kills { get; internal set; }
         [JsonProperty]

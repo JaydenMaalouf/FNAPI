@@ -9,6 +9,8 @@ namespace FortniteAPI.Classes
 {
     public class FNNews
     {
+        internal FNNews() { }
+
         [JsonProperty("typesm")]
         public FNGameMode Gamemode { get; internal set; }
         [JsonProperty]

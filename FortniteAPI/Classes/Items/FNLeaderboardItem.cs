@@ -10,6 +10,8 @@ namespace FortniteAPI.Classes.Items
 {
     public class FNBRLeaderboardItem : IFNUser
     {
+        internal FNBRLeaderboardItem() { }
+
         [JsonProperty]
         public double Kills { get; internal set; }
         [JsonProperty]
@@ -35,14 +37,14 @@ namespace FortniteAPI.Classes.Items
         [JsonProperty]
         public List<FNPlatform> Platforms { get; internal set; }
 
-        public T GetUser<T>(bool? ForceGet = false)
+        public T GetUser<T>(bool? ForceGet = false) where T : IFNUser
         {
             if (ForceGet == true)
             {
                 return (T)Activator.CreateInstance(typeof(T), new object[] { Username });
             }
 
-            return (T)Activator.CreateInstance(typeof(T), new object[] { UserID, Username, (this as IFNUser).Platforms });
+            return (T)Activator.CreateInstance(typeof(T), new object[] { UserID, Username, Platforms });
         }
 
         public FNBRUser GetUser(bool? ForceGet = false)

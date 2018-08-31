@@ -9,6 +9,8 @@ namespace FortniteAPI.Classes
 {
     public class FNChallenges
     {
+        internal FNChallenges() { }
+
         [JsonProperty]
         public FNSeason Season { get; internal set; }
         [JsonProperty]

@@ -1,5 +1,4 @@
-﻿using System.Net;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Collections.Generic;
 
 using RestSharp;
@@ -14,6 +13,8 @@ namespace FortniteAPI.Classes
 {
     public class FNBRStore
     {
+        internal FNBRStore() {}
+
         [JsonProperty]
         public List<FNBRStoreItem> Items { get; internal set; }
 
@@ -26,12 +27,10 @@ namespace FortniteAPI.Classes
         {
             return Items.FindAll(x => x.Featured == false);
         }
-
-        public async Task<List<FNBRItem>> SearchAsync(string name, FNBRItemRarity? rarity = null) => await Task.FromResult(Search(name, rarity));
-        private List<FNBRItem> Search(string name, FNBRItemRarity? rarity = null)
+        
+        public async Task<List<FNBRItem>> SearchAsync(string name, FNBRItemRarity? rarity = null)
         {
-            var client = new WebClient();
-            var content = client.DownloadString("https://fortnite-public-files.theapinetwork.com/search?query=name:" + name + (rarity != null ? ";rarity:" + rarity.ToString().ToLower() : ""));
+            var content = await FNAPI.SendWebRequestAsync("https://fortnite-public-files.theapinetwork.com/search?query=name:" + name + (rarity != null ? ";rarity:" + rarity.ToString().ToLower() : "")).ConfigureAwait(false);
 
             try
             {
@@ -43,13 +42,12 @@ namespace FortniteAPI.Classes
             }
         }
 
-        public async Task<List<FNBRStoreItem>> GetUpcomingItemsAsync() => await Task.FromResult(GetUpcomingItems());
-        private List<FNBRStoreItem> GetUpcomingItems()
+        public async Task<List<FNBRStoreItem>> GetUpcomingItemsAsync()
         {
             var request = new RestRequest("upcoming/get", Method.POST);
             request.AddParameter("language", "en");
 
-            IRestResponse response = FNAPI.SendRequest(request);
+            IRestResponse response = await FNAPI.SendRestRequestAsync(request).ConfigureAwait(false);
             if (response.ResponseStatus != ResponseStatus.Completed)
             {
                 return null;

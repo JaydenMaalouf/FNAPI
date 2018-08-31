@@ -2,17 +2,14 @@
 [![Discord](https://discordapp.com/api/guilds/474621956562616331/widget.png)](https://discordapp.com/invite/8zPBaCQ)
 
 # FNAPI - C# Fortnite API
-
 An unofficial .NET API Wrapper for the Fortnite API (http://fortniteapi.com)
 Documentation is found below!
 
 ## Installation
-
 Our stable build is available from NuGet through the FNAPI metapackage:
 - [FNAPI](https://www.nuget.org/packages/FNAPI/)
 
 ## Getting Started
-
 Once you have added the NuGet Package to your Project, you will need to add the `using FortniteAPI;` to your class header.
 Then simply instance the FNAPI class with your API key, like so:
 ```csharp
@@ -113,7 +110,7 @@ var status = await API.GetStatusAsync();
 ```
 
 ## GetPatchnotesAsync()
-Get the latest Patchnotes for Fortnite.
+Want the latest patchnotes? Use this simple call to get data from the Patchnotes. This includes: `title`,`description`, `images` and an `ExternalLink` to the patchnotes page.
 ```csharp
 var patchnotes = await API.GetPatchnotesAsync();
 ```
@@ -123,6 +120,7 @@ Returns the current Week.
 ```csharp
 var week = API.GetCurrentWeek();
 ```
+
 Returns the current Season.
 ## GetCurrentSeason()
 ```csharp

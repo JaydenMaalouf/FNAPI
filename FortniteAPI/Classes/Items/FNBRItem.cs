@@ -14,6 +14,8 @@ namespace FortniteAPI.Classes.Items
 {
     public class FNBRItem : FNItem, IFNItemProperties
     {
+        internal FNBRItem() { }
+
         [JsonProperty("type")]
         public FNBRItemType ItemType { get; internal set; }
         [JsonProperty]
@@ -23,15 +25,14 @@ namespace FortniteAPI.Classes.Items
         public FNBRItemObtained Obtained { get; internal set; }
         [JsonProperty]
         public FNItemImages Images { get; internal set; }
-
-        public async Task<FNBRItemOccurrences> GetOccurencesAsync() => await Task.FromResult(GetOccurences());
-        private FNBRItemOccurrences GetOccurences()
+        
+        public async Task<FNBRItemOccurrences> GetOccurencesAsync()
         {
             var request = new RestRequest("item/get", Method.POST);
             request.AddHeader("Authorization", FNAPI.APIKey);
             request.AddParameter("ids", ItemID);
 
-            IRestResponse response = FNAPI.SendRequest(request);
+            IRestResponse response = await FNAPI.SendRestRequestAsync(request).ConfigureAwait(false);
             if (response.ResponseStatus != ResponseStatus.Completed)
             {
                 return null;
@@ -60,6 +61,8 @@ namespace FortniteAPI.Classes.Items
 
     public class FNBRItemObtained
     {
+        internal FNBRItemObtained() { }
+
         [JsonProperty]
         public string Obtained { get; internal set; }
         [JsonProperty]
@@ -68,6 +71,8 @@ namespace FortniteAPI.Classes.Items
 
     public class FNBRItemOccurrences
     {
+        internal FNBRItemOccurrences() { }
+
         [JsonProperty]
         public string First { get; internal set; }
         [JsonProperty]
@@ -80,6 +85,8 @@ namespace FortniteAPI.Classes.Items
 
     public class FNBRItemOccurrenceEntry
     {
+        internal FNBRItemOccurrenceEntry() { }
+
         [JsonProperty]
         public string Date { get; internal set; }
         [JsonProperty]

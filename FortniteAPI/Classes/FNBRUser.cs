@@ -13,8 +13,7 @@ namespace FortniteAPI.Classes
 {
     public class FNBRUser : FNUser, IFNBRUser
     {
-        public async Task<FNBRStats> GetStatsAsync(FNPlatform platform = FNPlatform.PC, FNStatWindow? window = null) => await Task.FromResult(GetStats(platform, window));
-        private FNBRStats GetStats(FNPlatform platform = FNPlatform.PC, FNStatWindow? window = null)
+        public async Task<FNBRStats> GetStatsAsync(FNPlatform platform = FNPlatform.PC, FNStatWindow? window = null)
         {
             if (Platforms.Contains(platform))
             {
@@ -26,12 +25,12 @@ namespace FortniteAPI.Classes
                     request.AddParameter("window", window.ToString().ToLower());
                 }
 
-                IRestResponse response = FNAPI.SendRequest(request);
+                IRestResponse response = await FNAPI.SendRestRequestAsync(request).ConfigureAwait(false);
                 if (response.ResponseStatus != ResponseStatus.Completed)
                 {
                     return null;
                 }
-
+                
                 var tempUser = JsonConvert.DeserializeObject<FNBRTempUser>(response.Content);
                 if (tempUser == null)
                 {
@@ -43,8 +42,8 @@ namespace FortniteAPI.Classes
             return null;
         }
 
-        public FNBRUser() { }
-        public FNBRUser(UID uid, string username, List<FNPlatform> platforms) : base(uid, username, platforms) { }
+        internal FNBRUser() { }
+        internal FNBRUser(UID uid, string username, List<FNPlatform> platforms) : base(uid, username, platforms) { }
         public FNBRUser(string username) : base(username) { }
         public FNBRUser(UID userID) : base(userID) { }
         public FNBRUser(IFNUser user)
