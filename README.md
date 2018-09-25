@@ -41,11 +41,11 @@ var user = API.GetUser<FNBRUser>("username");
 var stats = await user.GetStatsAsync();
 ```
 
-## BR.GetStoreAsync()
+## BR.Store.GetStoreAsync()
 The current store is a breeze to get using `GetStoreAsync()`. 
 This is an `async` method though, so it will need to be used with `await`.
 ```csharp
-var store = await API.BR.GetStoreAsync();
+var store = await API.BR.Store.GetStoreAsync();
 ```
 This will return an `FNBRStore` object - which holds all the current in-store items.
 You can also use `GetFeaturedStore()` and `GetDailyStore()` on the `FNBRStore` to return the corresponding in-store items.
@@ -55,64 +55,58 @@ var featured = store.GetFeaturedStore();
 ```
 The `FNBRStore` also has the ability to get any upcoming items available but not yet in stores.
 ```csharp
-var upcoming = await store.GetUpcomingItemsAsync();
+var upcoming = await API.BR.Store.GetUpcomingItemsAsync();
 ```
 If you are looking for an item that isn't currently in-stores, you can search for it!
 ```csharp
-var item = await store.SearchAsync("ITEM NAME");
+var item = await API.BR.Store.SearchAsync("ITEM NAME");
 ```
 This will return an `FNStoreItem` which can be used to get more details on the item. 
 For example, we can use it to get the occurrences of said item.
 ```csharp
-var searchItem = await store.SearchAsync("ITEM NAME").First();
-var item = await API.BR.GetItemAsync(searchItem.ItemID);
+var searchItem = API.BR.Store.SearchAsync("ITEM NAME").First();
+var item = await API.BR.Store.GetItemAsync(searchItem.ItemID);
 var occurrences = await item.GetOccurrencesAsync();
 ```
 
-## BR.GetChallengesAsync()
+## BR.Challenges.GetChallengesAsync()
 >NOTE: This won't expose any unreleased challenges.
 
 This will return a list of `FNChallengeItem`. Which holds information about the challenge's name, stars required and difficulty.
 You can check which the current week for challenges like so:
 ```csharp
-var challenges = API.BR.GetChallengesAsync();
+var challenges = API.BR.Challenges.GetChallengesAsync();
 ```
 
-## BR.GetLeaderboardAsync()
+## BR.Leaderboard.GetLeaderboardAsync()
 In Battle Royale, there are Global Leaderboards. You can get these using the API, quick easily!
 Using `GetLeaderboardAsync()` will return a list of `FNLeaderboardItem`. 
 ```csharp
-var leaderboard = await API.BR.GetLeaderboardAsync();
+var leaderboard = await API.BR.Leaderboard.GetLeaderboardAsync();
 ```
 This includes information about each leaderboard entry. However, from this, you can then use `GetUser()` to return a `FNBRUser` object based on the leaderboard entry - this can then be used to look up the players stats.
 ```csharp
-	var leaderboardItem = await API.BR.GetLeaderboardAsync().First();
+	var leaderboardItem = await API.BR.Leaderboard.GetLeaderboardAsync().First();
 	var user = leaderboardItem.GetUser();
 	var userStats = await user.GetStatsAsync();
 ```
 
-## BR.GetNewsAsync()
+## BR.News.GetNewsAsync()
 This returns a list of `FNNewsItem`. This holds the Title, Body and Image for the BR MOTD. 
 ```csharp
-var news = await API.BR.GetNewsAsync();
+var news = await API.BR.News.GetNewsAsync();
 ```
 
-## STW.GetNewsAsync()
+## STW.News.GetNewsAsync()
 This returns a list of `FNNewsItem`. This holds the Title, Body and Image for the STW MOTD.
 ```csharp
-var news = await API.STW.GetNewsAsync();
+var news = await API.STW.News.GetNewsAsync();
 ```
 
 ## GetStatusAsync()
 Need to check whether servers are up and running? Simply use the `GetStatusAsync()` method.
 ```csharp
 var status = await API.GetStatusAsync();
-```
-
-## GetPatchnotesAsync()
-Want the latest patchnotes? Use this simple call to get data from the Patchnotes. This includes: `title`,`description`, `images` and an `ExternalLink` to the patchnotes page.
-```csharp
-var patchnotes = await API.GetPatchnotesAsync();
 ```
 
 ## GetCurrentWeek()
@@ -125,4 +119,10 @@ Returns the current Season.
 ## GetCurrentSeason()
 ```csharp
 var season = API.GetCurrentSeason();
+```
+
+## Patchnotes.GetPatchnotesAsync()
+Want the latest patchnotes? Use this simple call to get data from the Patchnotes. This includes: `title`,`description`, `images` and an `ExternalLink` to the patchnotes page.
+```csharp
+var patchnotes = await API.Patchnotes.GetPatchnotesAsync();
 ```
