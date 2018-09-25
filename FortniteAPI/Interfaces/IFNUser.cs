@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 
 using FortniteAPI.Enums;
-using FortniteAPI.Classes;
 
 namespace FortniteAPI.Interfaces
 {

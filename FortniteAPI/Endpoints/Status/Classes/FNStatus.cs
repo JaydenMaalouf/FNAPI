@@ -2,7 +2,7 @@
 
 using FortniteAPI.Enums;
 
-namespace FortniteAPI.Classes
+namespace FortniteAPI.Endpoints.Status
 {
     public class FNStatus
     {

@@ -1,6 +1,4 @@
-﻿using FortniteAPI.Classes;
-
-namespace FortniteAPI.Interfaces
+﻿namespace FortniteAPI.Interfaces
 {
     public interface IFNItem
     {

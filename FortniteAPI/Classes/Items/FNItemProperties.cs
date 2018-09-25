@@ -3,7 +3,7 @@
 using FortniteAPI.Enums;
 using FortniteAPI.Interfaces;
 
-namespace FortniteAPI.Classes.Items
+namespace FortniteAPI.Endpoints.Store.Items
 {
     public class FNItemProperties : IFNItemProperties
     {

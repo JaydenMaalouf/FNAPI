@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace FortniteAPI.Classes.Items
+namespace FortniteAPI.Endpoints.Patchnotes.Items
 {
     public class FNPatchnoteItem
     {

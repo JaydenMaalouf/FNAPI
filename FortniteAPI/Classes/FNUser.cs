@@ -15,10 +15,15 @@ namespace FortniteAPI.Classes
         [JsonProperty]
         [JsonConverter(typeof(UIDConverter))]
         public UID UserID { get; internal set; }
+
         [JsonProperty]
         public string Username { get; internal set; }
+
         [JsonProperty]
-        public List<FNPlatform> Platforms { get; internal set; }
+        public List<FNPlatform> Platforms { get; internal set; } = new List<FNPlatform>();
+
+        [JsonProperty]
+        private FNPlatform Platform { set { Platforms.Add(value); } }
 
         [JsonProperty]
         [JsonConverter(typeof(UIDConverter))]
@@ -42,7 +47,7 @@ namespace FortniteAPI.Classes
 
         public FNUser(string username)
         {
-            var request = new RestRequest("users/id", Method.POST);
+            var request = new RestRequest("users/id", Method.GET);
             request.AddParameter("username", username);
             IRestResponse response = FNAPI.SendRestRequestAsync(request).Result;
             if (response.ResponseStatus != ResponseStatus.Completed)
@@ -55,8 +60,8 @@ namespace FortniteAPI.Classes
 
         public FNUser(UID userID)
         {
-            var request = new RestRequest("users/username out of id", Method.POST);
-            request.AddParameter("ids[0]", userID.GetUID());
+            var request = new RestRequest("users/username out of id", Method.GET);
+            request.AddParameter("ids[0]", userID.UIDToString());
             IRestResponse response = FNAPI.SendRestRequestAsync(request).Result;
             if (response.ResponseStatus != ResponseStatus.Completed)
             {
@@ -70,13 +75,6 @@ namespace FortniteAPI.Classes
                 UserID = user.UserID;
                 Platforms = user.Platforms;
             }
-        }
-
-        public FNUser(IFNBRUser user)
-        {
-            UserID = user.UserID;
-            Username = user.Username;
-            Platforms = user.Platforms;
         }
 
         public T ConvertTo<T>() where T : IFNUser

@@ -3,9 +3,9 @@
 using Newtonsoft.Json;
 
 using FortniteAPI.Enums;
-using FortniteAPI.Classes.Items;
+using FortniteAPI.Endpoints.News.Items;
 
-namespace FortniteAPI.Classes
+namespace FortniteAPI.Endpoints.News
 {
     public class FNNews
     {

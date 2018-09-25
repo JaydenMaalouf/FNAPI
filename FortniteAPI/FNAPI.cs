@@ -1,125 +1,30 @@
 ﻿using System;
 using System.Net;
 using System.Threading.Tasks;
-using System.Collections.Generic;
 
 using RestSharp;
 
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-
-using Every;
-
 using FortniteAPI.Enums;
 using FortniteAPI.Classes;
-using FortniteAPI.Classes.Items;
 using FortniteAPI.Interfaces;
+using FortniteAPI.Managers.Interfaces;
+using FortniteAPI.Endpoints.Status;
+using FortniteAPI.Endpoints.Patchnotes;
+using FortniteAPI.Endpoints.Interfaces;
 
 namespace FortniteAPI
 {
-    public class BRManager
+    public class FNAPI : IFNAPI
     {
-        public delegate Task StoreUpdatedHandler(FNBRStore store);
-        public event StoreUpdatedHandler StoreUpdated;
-
-        public BRManager()
-        {
-            Ever.y().Day.At(DateTimeOffset.Now.Offset).Do(async () =>
-            {
-                var store = await GetStoreAsync();
-                await StoreUpdated(store);
-            });
-        }
-
-        public async Task<FNNews> GetNewsAsync()
-        {
-            var request = new RestRequest("br_motd/get", Method.POST);
-            IRestResponse response = await FNAPI.SendRestRequestAsync(request).ConfigureAwait(false);
-            if (response.ResponseStatus != ResponseStatus.Completed)
-            {
-                return null;
-            }
-
-            return JsonConvert.DeserializeObject<FNNews>(response.Content);            
-        }
-
-        public async Task<FNChallenges> GetChallengesAsync(FNSeason? season = FNSeason.SEASON5)
-        {
-            var request = new RestRequest("challenges/get", Method.POST);
-            request.AddParameter("language", "en");
-            request.AddParameter("season", season.ToString().ToLower());
-            IRestResponse response = await FNAPI.SendRestRequestAsync(request).ConfigureAwait(false);
-            if (response.ResponseStatus != ResponseStatus.Completed)
-            {
-                return null;
-            }
-
-            return JsonConvert.DeserializeObject<FNChallenges>(response.Content);
-        }
-        
-        public async Task<FNBRStore> GetStoreAsync()
-        {
-            var request = new RestRequest("store/get", Method.POST);
-            request.AddParameter("language", "en");
-            IRestResponse response = await FNAPI.SendRestRequestAsync(request).ConfigureAwait(false);
-            if (response.ResponseStatus != ResponseStatus.Completed)
-            {
-                return null;
-            }
-
-            return JsonConvert.DeserializeObject<FNBRStore>(response.Content);
-        }
-
-        public async Task<List<FNBRLeaderboardItem>> GetLeaderboardAsync(FNLeaderboardType type = FNLeaderboardType.TOP_10_WINS)
-        {
-            var request = new RestRequest("leaderboards/get", Method.POST);
-            request.AddParameter("window", type.ToString().ToLower());
-            IRestResponse response = await FNAPI.SendRestRequestAsync(request).ConfigureAwait(false);
-            if (response.ResponseStatus != ResponseStatus.Completed)
-            {
-                return null;
-            }
-
-            return JObject.Parse(response.Content)["entries"].ToObject<List<FNBRLeaderboardItem>>();
-        }
-        
-        public async Task<FNBRItem> GetItemAsync(UID UID)
-        {
-            var request = new RestRequest("item/get", Method.POST);
-            request.AddParameter("ids", UID.GetUID());
-            IRestResponse response = await FNAPI.SendRestRequestAsync(request).ConfigureAwait(false);
-            if (response.ResponseStatus != ResponseStatus.Completed)
-            {
-                return null;
-            }
-
-            return JsonConvert.DeserializeObject<FNBRItem>(response.Content);
-        }
-    }
-
-    public class STWManager
-    {
-        public async Task<FNNews> GetNewsAsync()
-        {
-            var request = new RestRequest("stw_motd/get", Method.POST);
-            IRestResponse response = await FNAPI.SendRestRequestAsync(request).ConfigureAwait(false);
-            if (response.ResponseStatus != ResponseStatus.Completed)
-            {
-                return null;
-            }
-
-            return JsonConvert.DeserializeObject<FNNews>(response.Content);
-        }
-    }
-    
-    public class FNAPI
-    {
-        public static string APIKey;
-        public BRManager BR = new BRManager();
-        public STWManager STW = new STWManager();
+        private static string APIKey;
 
         private static WebClient webClient = new WebClient();
         private static RestClient restClient = new RestClient("https://fortnite-public-api.theapinetwork.com/prod09/");
+
+        public IFNBRManager BR => new FNBRManager();
+        public IFNSTWManager STW => new FNSTWManager();
+        public IStatusEndpoint Status => new StatusEndpoint();
+        public IPatchnotesEndpoint Patchnotes => new PatchnotesEndpoint();
 
         public FNAPI(string _APIKey)
         {
@@ -135,7 +40,7 @@ namespace FortniteAPI
         
         public FNWeek GetCurrentWeek()
         {
-            var status = BR.GetChallengesAsync().Result;
+            var status = BR.Challenges.GetChallengesAsync().Result;
             if (status != null)
             {
                 return status.CurrentWeek;
@@ -145,7 +50,7 @@ namespace FortniteAPI
 
         public string GetCurrentVersion()
         {
-            var status = GetStatusAsync().Result;
+            var status = Status.GetStatusAsync().Result;
             return status.Version;
         }
 
@@ -161,30 +66,6 @@ namespace FortniteAPI
                 return (FNSeason)seasonInt;
             }
             return FNSeason.SEASON_UNKNOWN;
-        }
-        
-        public async Task<FNStatus> GetStatusAsync()
-        {
-            var request = new RestRequest("status/fortnite_server_status", Method.POST);
-            IRestResponse response = await SendRestRequestAsync(request).ConfigureAwait(false);
-            if (response.ResponseStatus != ResponseStatus.Completed)
-            {
-                return null;
-            }
-
-            return JsonConvert.DeserializeObject<FNStatus>(response.Content);
-        }
-        
-        public async Task<List<FNPatchnoteItem>> GetPatchnotesAsync()
-        {
-            var request = new RestRequest("patchnotes/get", Method.POST);
-            IRestResponse response = await SendRestRequestAsync(request).ConfigureAwait(false);
-            if (response.ResponseStatus != ResponseStatus.Completed)
-            {
-                return null;
-            }
-
-            return JObject.Parse(response.Content)["blogList"].ToObject<List<FNPatchnoteItem>>();
         }
 
         public FNUser GetUser(string username)

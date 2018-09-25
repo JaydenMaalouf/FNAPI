@@ -3,9 +3,9 @@
 using Newtonsoft.Json;
 
 using FortniteAPI.Enums;
-using FortniteAPI.Classes.Items;
+using FortniteAPI.Endpoints.Challenges.Items;
 
-namespace FortniteAPI.Classes
+namespace FortniteAPI.Endpoints.Challenges
 {
     public class FNChallenges
     {

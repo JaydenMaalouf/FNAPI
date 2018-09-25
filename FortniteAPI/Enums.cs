@@ -2,9 +2,10 @@
 {
     public enum FNLeaderboardType
     {
-        TOP_10_KILLS,
-        TOP_10_WINS,
-        TOP_10_SCORE
+        KILLS,
+        WINS,
+        MATCHES,
+        SCORE
     }
 
     public enum FNSeason
@@ -15,6 +16,8 @@
         SEASON3,
         SEASON4,
         SEASON5,
+        SEASON6,
+        CURRENT,
     }
 
     public enum FNGameMode
@@ -89,6 +92,7 @@
     
     public enum FNBRItemRarity
     {
+        COMMON,
         UNCOMMON,
         RARE,
         LEGENDARY,

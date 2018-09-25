@@ -1,39 +1,36 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 
-namespace FortniteAPI.Classes
+using Newtonsoft.Json;
+
+public class UID
 {
-    public class UID
+    string uid; 
+
+    public UID(string _uid)
     {
-        string uid; 
-
-        public UID(string _uid)
-        {
-            uid = _uid;
-        }
-
-        public string GetUID()
-        {
-            return uid;
-        }
+        uid = _uid;
     }
 
-    public class UIDConverter : JsonConverter
+    public string UIDToString()
     {
-        public override bool CanConvert(Type objectType)
-        {
-            throw new NotImplementedException();
-        }
+        return uid;
+    }
+}
 
-        public override object ReadJson(Newtonsoft.Json.JsonReader reader, Type objectType, object existingValue, Newtonsoft.Json.JsonSerializer serializer)
-        {
-            return new UID((string)reader.Value);
-        }
-
-        public override void WriteJson(Newtonsoft.Json.JsonWriter writer, object value, Newtonsoft.Json.JsonSerializer serializer)
-        {
-            throw new NotImplementedException();
-        }
+public class UIDConverter : JsonConverter
+{
+    public override bool CanConvert(Type objectType)
+    {
+        throw new NotImplementedException();
     }
 
+    public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+    {
+        return new UID((string)reader.Value);
+    }
+
+    public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+    {
+        throw new NotImplementedException();
+    }
 }
