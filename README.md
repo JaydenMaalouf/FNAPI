@@ -17,12 +17,6 @@ var API = new FNAPI("ENTER A VALID API KEY HERE");
 ```
 Now you can easily make calls to the API.
 
-## GetCurrentVersion()
-Returns the current Game Version.
-```csharp
-var version = API.GetCurrentVersion();
-```
-
 ## GetUser()
 The base user class `FNUser` contains the UID and Username of a user. 
 If you already know a user's UID or Username, you can use the `GetUser()` method to return an `FNUser` object.
@@ -101,6 +95,12 @@ var news = await API.BR.News.GetNewsAsync();
 This returns a list of `FNNewsItem`. This holds the Title, Body and Image for the STW MOTD.
 ```csharp
 var news = await API.STW.News.GetNewsAsync();
+```
+
+## GetCurrentVersion()
+Returns the current Game Version.
+```csharp
+var version = API.GetCurrentVersion();
 ```
 
 ## GetStatusAsync()
