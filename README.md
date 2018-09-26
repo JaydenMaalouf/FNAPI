@@ -1,4 +1,4 @@
-[![NuGet](https://img.shields.io/badge/nuget-0.0.7-brightgreen.svg)](https://www.nuget.org/packages/FNAPI/)
+[![NuGet](https://img.shields.io/badge/nuget-1.1.0-brightgreen.svg)](https://www.nuget.org/packages/FNAPI/)
 [![Discord](https://discordapp.com/api/guilds/474621956562616331/widget.png)](https://discordapp.com/invite/8zPBaCQ)
 
 # FNAPI - C# Fortnite API
