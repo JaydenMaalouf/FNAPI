@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+
 using FortniteAPI.Endpoints.News;
 
 namespace FortniteAPI.Endpoints.Interfaces

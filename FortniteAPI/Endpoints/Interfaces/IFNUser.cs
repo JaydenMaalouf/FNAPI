@@ -2,12 +2,14 @@
 
 using FortniteAPI.Enums;
 
-namespace FortniteAPI.Interfaces
+namespace FortniteAPI.Endpoints.Interfaces
 {
     public interface IFNUser
     {
-        UID UserID { get; }
+        UID UserId { get; }
         string Username { get;  }
         List<FNPlatform> Platforms { get; }
+
+        IStatsEndpoint Stats { get; }
     }
 }

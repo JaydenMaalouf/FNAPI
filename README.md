@@ -28,17 +28,17 @@ The base user class `FNUser` contains the UID and Username of a user.
 If you already know a user's UID or Username, you can use the `GetUser()` method to return an `FNUser` object.
 - Username:
 ```csharp
-var user = API.GetUser<FNUser>("username");
+var user = API.GetUser("username");
 ```
 - UID:
 ```csharp
-var user = API.GetUser<FNUser>(new UID("uid"));
+var user = API.GetUser(new UID("uid"));
 ```
 
-You can change the type returned by `GetUser()` too. For instance, if you were wanting to return a `FNBRUser` (say: to get the user's BR stats) - then you can simply pass that instead.
+If you're wanting to get a user's BR stats, you can simply use `.Stats.GetBRStatsAsync();` and it will return the requested stats.
 ```csharp
-var user = API.GetUser<FNBRUser>("username");
-var stats = await user.GetStatsAsync();
+var user = API.GetUser("username");
+var stats = await user.Stats.GetBRStatsAsync();
 ```
 
 ## BR.Store.GetStoreAsync()

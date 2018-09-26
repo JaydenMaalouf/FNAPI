@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 
 using FortniteAPI.Enums;
-using FortniteAPI.Classes;
+using FortniteAPI.Endpoints.User;
 
 namespace FortniteAPI.Endpoints.Leaderboard.Items
 {
@@ -27,9 +27,9 @@ namespace FortniteAPI.Endpoints.Leaderboard.Items
         public int Rank { get; internal set; }
 
         [JsonProperty]
-        private FNBRUser User { get; set; }
+        private FNUser User { get; set; }
 
-        public FNBRUser GetUser()
+        public FNUser GetUser()
         {
             return User;
         }

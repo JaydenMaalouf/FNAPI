@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 
 using FortniteAPI;
-using FortniteAPI.Classes;
 using FortniteAPI.Endpoints.Store;
 
 namespace ExampleTest
@@ -31,18 +30,16 @@ namespace ExampleTest
             var search = await APi.BR.Store.SearchAsync("Brite Gunner", FortniteAPI.Enums.FNBRItemRarity.EPIC);
             var searchItem = search[0];
 
-            var item = await APi.BR.Store.GetItemAsync(searchItem.ItemID);
+            var item = await APi.BR.Store.GetItemAsync(searchItem.ItemId);
 
             var user = APi.GetUser("Kangaaa");
-            var userBR = APi.GetUser<FNBRUser>("Kangaaa");
-            var userBRR = user.ConvertTo<FNBRUser>();
+            var stats = await user.Stats.GetBRStatsAsync();
             var userUID = APi.GetUser(new UID("711b6eaea0464736ab39212e16ac6c87"));
-            var stats = await userBR.GetStatsAsync();
 
             var leaderboard = await APi.BR.Leaderboard.GetLeaderboardAsync();
             var leader = leaderboard[0];
             var lUser = leader.GetUser();
-            var lStats = await lUser.GetStatsAsync();
+            var lStats = await lUser.Stats.GetBRStatsAsync();
 
             var brNews = await APi.BR.News.GetNewsAsync();
             var challenges = await APi.BR.Challenges.GetChallengesAsync();

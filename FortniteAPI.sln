@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.27130.2024
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FNAPI", "FortniteAPI\FNAPI.csproj", "{C239A9BB-0E17-4E51-8771-459A6FE12D54}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExampleTest", "ExampleTest\ExampleTest.csproj", "{AEE70357-DF02-4ACD-93BB-039D4F4BC093}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExampleTest", "ExampleTest\ExampleTest.csproj", "{AEE70357-DF02-4ACD-93BB-039D4F4BC093}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

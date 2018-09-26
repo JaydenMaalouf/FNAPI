@@ -7,7 +7,7 @@ using Newtonsoft.Json.Linq;
 
 using RestSharp;
 
-using Every;
+using FluentScheduler;
 
 using FortniteAPI.Enums;
 using FortniteAPI.Endpoints.Interfaces;
@@ -17,13 +17,20 @@ namespace FortniteAPI.Endpoints.Store
 {
     public class StoreEndpoint : IStoreEndpoint
     {
+        internal Registry StoreUpdatedScheduler = new Registry();
+
         internal StoreEndpoint()
         {
-            Ever.y().Day.At(DateTimeOffset.Now.Offset).Do(async () =>
+            var timeOfDay = DateTime.Today.AddDays(1).Add(DateTimeOffset.Now.Offset).TimeOfDay;
+            StoreUpdatedScheduler.Schedule(async () =>
             {
-                var store = await GetStoreAsync();
-                await StoreUpdated(store);
-            });
+                if (StoreUpdated != null && StoreUpdated.GetInvocationList().Length > 0)
+                {
+                    var store = await GetStoreAsync();
+                    await StoreUpdated(store);
+                }
+            }).ToRunEvery(1).Days().At(timeOfDay.Hours, timeOfDay.Minutes);
+            JobManager.Initialize(StoreUpdatedScheduler);
         }
 
         public event StoreUpdatedHandler StoreUpdated;
@@ -55,10 +62,10 @@ namespace FortniteAPI.Endpoints.Store
             }
         }
 
-        public async Task<FNBRItem> GetItemAsync(UID UID)
+        public async Task<FNBRItem> GetItemAsync(UID UniqueId)
         {
             var request = new RestRequest("item/get", Method.GET);
-            request.AddParameter("ids", UID.UIDToString());
+            request.AddParameter("ids", UniqueId.UIDToString());
             IRestResponse response = await FNAPI.SendRestRequestAsync(request).ConfigureAwait(false);
             if (response.ResponseStatus != ResponseStatus.Completed)
             {

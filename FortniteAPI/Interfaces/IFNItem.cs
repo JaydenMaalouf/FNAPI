@@ -2,7 +2,7 @@
 {
     public interface IFNItem
     {
-        UID ItemID { get; }
+        UID ItemId { get; }
         string Name { get; }
     }
 }

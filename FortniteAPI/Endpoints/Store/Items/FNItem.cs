@@ -2,7 +2,7 @@
 
 using FortniteAPI.Interfaces;
 
-namespace FortniteAPI.Classes.Items
+namespace FortniteAPI.Endpoints.Store.Items
 {
     public class FNItem : IFNItem
     {
@@ -10,12 +10,12 @@ namespace FortniteAPI.Classes.Items
 
         [JsonProperty]
         [JsonConverter(typeof(UIDConverter))]
-        public UID ItemID { get; internal set; }
+        public UID ItemId { get; internal set; }
         [JsonProperty]
         public string Name { get; internal set; }
 
         [JsonProperty]
         [JsonConverter(typeof(UIDConverter))]
-        private UID Identifier { set { ItemID = value; } }
+        private UID Identifier { set { ItemId = value; } }
     }
 }

@@ -5,12 +5,12 @@ using System.Threading.Tasks;
 using RestSharp;
 
 using FortniteAPI.Enums;
-using FortniteAPI.Classes;
 using FortniteAPI.Interfaces;
-using FortniteAPI.Managers.Interfaces;
+using FortniteAPI.Endpoints.User;
 using FortniteAPI.Endpoints.Status;
 using FortniteAPI.Endpoints.Patchnotes;
 using FortniteAPI.Endpoints.Interfaces;
+using FortniteAPI.Managers.Interfaces;
 
 namespace FortniteAPI
 {
@@ -70,22 +70,12 @@ namespace FortniteAPI
 
         public FNUser GetUser(string username)
         {
-            return GetUser<FNUser>(username);
+            return new FNUser(username);
         }
 
-        public FNUser GetUser(UID userID)
+        public FNUser GetUser(UID UniqueId)
         {
-            return GetUser<FNUser>(userID);
-        }
-
-        public T GetUser<T>(string username) where T : IFNUser
-        {
-            return (T)Activator.CreateInstance(typeof(T), new object[] { username });
-        }
-
-        public T GetUser<T>(UID userID) where T : IFNUser
-        {
-            return (T)Activator.CreateInstance(typeof(T), new object[] { userID });
+            return new FNUser(UniqueId);
         }
 
         internal static async Task<string> SendWebRequestAsync(string request)

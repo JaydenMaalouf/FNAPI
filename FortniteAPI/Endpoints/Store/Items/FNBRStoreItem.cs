@@ -3,7 +3,6 @@
 using Newtonsoft.Json;
 
 using FortniteAPI.Enums;
-using FortniteAPI.Classes.Items;
 
 namespace FortniteAPI.Endpoints.Store.Items
 {

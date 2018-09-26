@@ -1,5 +1,5 @@
-﻿using FortniteAPI.Endpoints.Interfaces;
-using FortniteAPI.Managers.Interfaces;
+﻿using FortniteAPI.Managers.Interfaces;
+using FortniteAPI.Endpoints.Interfaces;
 
 namespace FortniteAPI.Interfaces
 {

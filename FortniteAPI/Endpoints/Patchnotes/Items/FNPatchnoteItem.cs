@@ -1,13 +1,17 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+
+using Newtonsoft.Json;
 
 namespace FortniteAPI.Endpoints.Patchnotes.Items
 {
     public class FNPatchnoteItem
     {
         internal FNPatchnoteItem() { }
-
+        
         [JsonProperty("_id")]
-        public string ID { get; internal set; }
+        [JsonConverter(typeof(UIDConverter))]
+        public UID Id { get; internal set; }
+
         [JsonProperty]
         public string Title { get; internal set; }
         [JsonProperty("short")]
@@ -18,6 +22,9 @@ namespace FortniteAPI.Endpoints.Patchnotes.Items
         public string Image { get; internal set; }
         [JsonProperty]
         public string TrendingImage { get; internal set; }
+
+        [JsonProperty]
+        public DateTime Date { get;  internal set; }
 
         [JsonProperty]
         private string ExternalLink { set { Link = "https://fortnite.com" + value; } }

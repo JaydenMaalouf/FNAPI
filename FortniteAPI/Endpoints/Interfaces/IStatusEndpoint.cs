@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+
 using FortniteAPI.Endpoints.Status;
 
 namespace FortniteAPI.Endpoints.Interfaces

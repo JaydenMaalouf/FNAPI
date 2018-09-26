@@ -2,7 +2,6 @@
 
 using FortniteAPI.Enums;
 using FortniteAPI.Interfaces;
-using FortniteAPI.Classes.Items;
 
 namespace FortniteAPI.Endpoints.Store.Items
 {

@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json;
 
 using FortniteAPI.Enums;
-using FortniteAPI.Classes;
 using FortniteAPI.Interfaces;
 
 namespace FortniteAPI.Endpoints.Challenges.Items
@@ -12,7 +11,7 @@ namespace FortniteAPI.Endpoints.Challenges.Items
 
         [JsonProperty("Identifier")]
         [JsonConverter(typeof(UIDConverter))]
-        public UID ItemID { get; internal set; }
+        public UID ItemId { get; internal set; }
         [JsonProperty("Challenge")]
         public string Name { get; internal set; }
 

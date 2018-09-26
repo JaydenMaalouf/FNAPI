@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using System.Collections.Generic;
 
+using FortniteAPI.Enums;
 using FortniteAPI.Endpoints.Store;
 using FortniteAPI.Endpoints.Store.Items;
-using FortniteAPI.Enums;
 
 namespace FortniteAPI.Endpoints.Interfaces
 {
@@ -15,7 +15,7 @@ namespace FortniteAPI.Endpoints.Interfaces
 
         Task<FNBRStore> GetStoreAsync();
         Task<List<FNBRSearchItem>> SearchAsync(string name, FNBRItemRarity? rarity = null);
-        Task<FNBRItem> GetItemAsync(UID UID);
+        Task<FNBRItem> GetItemAsync(UID UniqueId);
         Task<List<FNBRStoreItem>> GetUpcomingItemsAsync();
     }
 }
