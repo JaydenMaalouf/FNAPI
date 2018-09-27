@@ -1,4 +1,4 @@
-[![NuGet](https://img.shields.io/badge/nuget-1.1.0-brightgreen.svg)](https://www.nuget.org/packages/FNAPI/)
+[![NuGet](https://img.shields.io/badge/nuget-1.1.2-brightgreen.svg)](https://www.nuget.org/packages/FNAPI/)
 [![Discord](https://discordapp.com/api/guilds/474621956562616331/widget.png)](https://discordapp.com/invite/8zPBaCQ)
 
 # FNAPI - C# Fortnite API
@@ -82,7 +82,7 @@ This includes information about each leaderboard entry. However, from this, you 
 ```csharp
 	var leaderboardItem = await API.BR.Leaderboard.GetLeaderboardAsync().First();
 	var user = leaderboardItem.GetUser();
-	var userStats = await user.GetStatsAsync();
+	var userStats = await user.Stats.GetBRStatsAsync();
 ```
 
 ## BR.News.GetNewsAsync()
@@ -95,6 +95,12 @@ var news = await API.BR.News.GetNewsAsync();
 This returns a list of `FNNewsItem`. This holds the Title, Body and Image for the STW MOTD.
 ```csharp
 var news = await API.STW.News.GetNewsAsync();
+```
+
+## Patchnotes.GetPatchnotesAsync()
+Want the latest patchnotes? Use this simple call to get data from the Patchnotes. This includes: `title`,`description`, `images` and an `ExternalLink` to the patchnotes page.
+```csharp
+var patchnotes = await API.Patchnotes.GetPatchnotesAsync();
 ```
 
 ## GetCurrentVersion()
@@ -119,10 +125,4 @@ Returns the current Season.
 ## GetCurrentSeason()
 ```csharp
 var season = API.GetCurrentSeason();
-```
-
-## Patchnotes.GetPatchnotesAsync()
-Want the latest patchnotes? Use this simple call to get data from the Patchnotes. This includes: `title`,`description`, `images` and an `ExternalLink` to the patchnotes page.
-```csharp
-var patchnotes = await API.Patchnotes.GetPatchnotesAsync();
 ```
