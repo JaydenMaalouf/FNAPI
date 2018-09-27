@@ -24,7 +24,7 @@ namespace FortniteAPI.Endpoints.Patchnotes.Items
         public string TrendingImage { get; internal set; }
 
         [JsonProperty]
-        public DateTime Date { get;  internal set; }
+        public DateTime DateTime { get;  internal set; }
 
         [JsonProperty]
         private string ExternalLink { set { Link = "https://fortnite.com" + value; } }
