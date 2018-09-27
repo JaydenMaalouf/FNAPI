@@ -11,8 +11,8 @@ namespace FortniteAPI.Managers.Interfaces
         internal FNBRManager() {}
 
         public IChallengesEndpoint Challenges => new ChallengesEndpoint();
+        public ILeaderboardEndpoint Leaderboard => new LeaderboardEndpoint();
         public INewsEndpoint News => new BRNewsEndpoint();
         public IStoreEndpoint Store => new StoreEndpoint();
-        public ILeaderboardEndpoint Leaderboard => new LeaderboardEndpoint();
     }
 }
