@@ -18,8 +18,8 @@ namespace FortniteAPI.Endpoints.Store.Items
         [JsonProperty]
         public FNBRItemImages Images { get; internal set; }
 
-        [JsonProperty]
-        public FNBRItemOccurrences Occurrences { get; internal set; }
+        [JsonProperty("occurrences")]
+        public FNBRItemOccurrences Count { get; internal set; }
 
         public Color GetRarityColor()
         {

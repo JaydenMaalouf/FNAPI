@@ -53,15 +53,16 @@ var upcoming = await API.BR.Store.GetUpcomingItemsAsync();
 ```
 If you are looking for an item that isn't currently in-stores, you can search for it!
 ```csharp
-var item = await API.BR.Store.SearchAsync("ITEM NAME");
+var item = await API.BR.Store.SearchItemAsync("ITEM NAME");
 ```
-This will return an `FNStoreItem` which can be used to get more details on the item. 
+This will return a list of `FNBRSearchItem` which can be used to get more details on the item. 
 For example, we can use it to get the occurrences of said item.
 ```csharp
-var searchItem = API.BR.Store.SearchAsync("ITEM NAME").First();
+var searchItem = API.BR.Store.SearchItemAsync("ITEM NAME").First();
 var item = await API.BR.Store.GetItemAsync(searchItem.ItemID);
-var occurrences = await item.GetOccurrencesAsync();
+var occurrences = item.Occurrences;
 ```
+>NOTE: The `SearchItemAsync` call does not consume your call count.
 
 ## BR.Challenges.GetChallengesAsync()
 >NOTE: This won't expose any unreleased challenges.
