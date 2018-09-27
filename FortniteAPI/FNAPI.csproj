@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>1.1.2</Version>
+    <Version>1.1.3</Version>
     <Authors>Kanga#8041</Authors>
     <Description>A Fortnite C# API Wrapper using the fortniteapi.com API</Description>
     <RepositoryUrl>https://github.com/JaydenMaalouf/FNAPI</RepositoryUrl>
@@ -12,7 +12,7 @@
     <PackageProjectUrl>https://github.com/JaydenMaalouf/FNAPI</PackageProjectUrl>
     <Copyright>Jayden Maalouf</Copyright>
     <PackageLicenseUrl>https://github.com/JaydenMaalouf/FNAPI/blob/master/LICENSE</PackageLicenseUrl>
-    <PackageTags>Fortnite; API; C#; Wrapper;</PackageTags>
+    <PackageTags>Fortnite; API; C#; Wrapper; Stats; Challenges; Leaderboard; News; Patchnotes; Store; Status</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
