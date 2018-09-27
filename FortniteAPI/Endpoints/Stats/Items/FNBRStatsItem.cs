@@ -2,9 +2,11 @@
 
 using Newtonsoft.Json;
 
+using FortniteAPI.Endpoints.Stats.Interfaces;
+
 namespace FortniteAPI.Classes.Items
 {
-    public class FNBRStatsItem
+    public class FNBRStatsItem : IFNBRStatsItem
     {
         internal FNBRStatsItem() { }
 
@@ -22,6 +24,7 @@ namespace FortniteAPI.Classes.Items
         public double Score { get; internal set; }
         [JsonProperty]
         public double WinRate { get; internal set; }
+
         [JsonProperty("lastupdate")]
         public double LastUpdated { get; internal set; }
 

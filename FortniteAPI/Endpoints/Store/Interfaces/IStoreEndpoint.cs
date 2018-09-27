@@ -14,8 +14,8 @@ namespace FortniteAPI.Endpoints.Interfaces
         event StoreUpdatedHandler StoreUpdated;
 
         Task<FNBRStore> GetStoreAsync();
-        Task<List<FNBRSearchItem>> SearchAsync(string name, FNBRItemRarity? rarity = null);
-        Task<FNBRItem> GetItemAsync(UID UniqueId);
+        Task<List<FNBRSearchItem>> SearchItemAsync(string name, FNBRItemRarity? rarity = null);
+        Task<FNBRLookupItem> GetItemAsync(UID UniqueId);
         Task<List<FNBRStoreItem>> GetUpcomingItemsAsync();
     }
 }

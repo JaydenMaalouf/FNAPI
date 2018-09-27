@@ -15,6 +15,6 @@ namespace FortniteAPI.Endpoints.Store.Items
         [JsonProperty]
         public int Occurrences { get; internal set; }
         [JsonProperty]
-        public List<FNBRItemOccurrenceEntry> Entries { get; internal set; }
+        public List<FNBRItemOccurrencesEntry> Entries { get; internal set; }
     }
 }

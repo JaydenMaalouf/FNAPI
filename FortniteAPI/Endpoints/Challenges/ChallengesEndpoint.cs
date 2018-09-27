@@ -13,10 +13,9 @@ namespace FortniteAPI.Endpoints.Challenges
     {
         internal ChallengesEndpoint() { }
 
-        public async Task<FNChallenges> GetChallengesAsync(FNSeason? season = FNSeason.CURRENT)
+        public async Task<FNChallenges> GetChallengesAsync(FNSeason season = FNSeason.CURRENT)
         {
             var request = new RestRequest("challenges/get", Method.GET);
-            request.AddParameter("language", "en");
             request.AddParameter("season", season.ToString().ToLower());
             IRestResponse response = await FNAPI.SendRestRequestAsync(request).ConfigureAwait(false);
             if (response.ResponseStatus != ResponseStatus.Completed)

@@ -17,6 +17,7 @@ namespace FortniteAPI
     public class FNAPI : IFNAPI
     {
         private static string APIKey;
+        private static FNLanguage Language;
 
         private static WebClient webClient = new WebClient();
         private static RestClient restClient = new RestClient("https://fortnite-public-api.theapinetwork.com/prod09/");
@@ -26,15 +27,17 @@ namespace FortniteAPI
         public IStatusEndpoint Status => new StatusEndpoint();
         public IPatchnotesEndpoint Patchnotes => new PatchnotesEndpoint();
 
-        public FNAPI(string _APIKey)
+        public FNAPI(string _APIKey, FNLanguage _Language = FNLanguage.EN)
         {
             APIKey = _APIKey;
+            Language = _Language;
         }
 
         //Use custom BaseURL
-        public FNAPI(string _APIKey, string _BaseURL)
+        public FNAPI(string _APIKey, string _BaseURL, FNLanguage _Language = FNLanguage.EN)
         {
             APIKey = _APIKey;
+            Language = _Language;
             restClient.BaseUrl = new Uri(_BaseURL);
         }
         
@@ -86,6 +89,7 @@ namespace FortniteAPI
         internal static async Task<IRestResponse> SendRestRequestAsync(RestRequest request)
         {
             request.AddHeader("Authorization", APIKey);
+            request.AddParameter("language", Language.ToString().ToLower());
             return await restClient.ExecuteTaskAsync(request).ConfigureAwait(false);
         }
     }

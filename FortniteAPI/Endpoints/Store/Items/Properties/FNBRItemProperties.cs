@@ -1,13 +1,14 @@
-﻿using Newtonsoft.Json;
+﻿using System.Drawing;
+
+using Newtonsoft.Json;
 
 using FortniteAPI.Enums;
-using FortniteAPI.Interfaces;
 
 namespace FortniteAPI.Endpoints.Store.Items
 {
-    public class FNItemProperties : IFNItemProperties
+    public class FNBRItemProperties : IFNBRItemProperties
     {
-        internal FNItemProperties() { }
+        internal FNBRItemProperties() { }
 
         [JsonProperty("type")]
         public FNBRItemType ItemType { get; internal set; }
@@ -17,8 +18,13 @@ namespace FortniteAPI.Endpoints.Store.Items
         [JsonProperty("image")]
         public string ImageURL { get; internal set; }
         [JsonProperty]
-        public FNItemImages Images { get; internal set; }
+        public FNBRItemImages Images { get; internal set; }
         [JsonProperty("obtained_type")]
         public FNBRItemObtainedType ObtainType { get; internal set; }
+
+        public Color GetRarityColor()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

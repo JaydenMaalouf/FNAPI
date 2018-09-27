@@ -41,7 +41,7 @@ namespace FortniteAPI.Endpoints.Stats
             return new FNBRStats(tempUser);
         }
 
-        public async Task<FNBRStatsItem> GetBRStatsAsync(FNPlatform platform = FNPlatform.PC, FNStatWindow window = FNStatWindow.ALLTIME, FNBRGameMode gameMode = FNBRGameMode.ALL)
+        public async Task<FNBRStatsItem> GetBRStatsAsync(FNBRGameMode gameMode, FNPlatform platform = FNPlatform.PC, FNStatWindow window = FNStatWindow.ALLTIME)
         {
             var stats = await GetBRStatsAsync(platform, window);
 

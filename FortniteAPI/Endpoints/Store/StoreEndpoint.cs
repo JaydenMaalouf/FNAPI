@@ -38,7 +38,6 @@ namespace FortniteAPI.Endpoints.Store
         public async Task<FNBRStore> GetStoreAsync()
         {
             var request = new RestRequest("store/get", Method.GET);
-            request.AddParameter("language", "en");
             IRestResponse response = await FNAPI.SendRestRequestAsync(request).ConfigureAwait(false);
             if (response.ResponseStatus != ResponseStatus.Completed)
             {
@@ -48,7 +47,7 @@ namespace FortniteAPI.Endpoints.Store
             return JsonConvert.DeserializeObject<FNBRStore>(response.Content);
         }
 
-        public async Task<List<FNBRSearchItem>> SearchAsync(string name, FNBRItemRarity? rarity = null)
+        public async Task<List<FNBRSearchItem>> SearchItemAsync(string name, FNBRItemRarity? rarity = null)
         {
             var content = await FNAPI.SendWebRequestAsync("https://fortnite-public-files.theapinetwork.com/search?query=name:" + name + (rarity != null ? ";rarity:" + rarity.ToString().ToLower() : "")).ConfigureAwait(false);
 
@@ -62,7 +61,7 @@ namespace FortniteAPI.Endpoints.Store
             }
         }
 
-        public async Task<FNBRItem> GetItemAsync(UID UniqueId)
+        public async Task<FNBRLookupItem> GetItemAsync(UID UniqueId)
         {
             var request = new RestRequest("item/get", Method.GET);
             request.AddParameter("ids", UniqueId.UIDToString());
@@ -72,13 +71,12 @@ namespace FortniteAPI.Endpoints.Store
                 return null;
             }
 
-            return JsonConvert.DeserializeObject<FNBRItem>(response.Content);
+            return JsonConvert.DeserializeObject<FNBRLookupItem>(response.Content);
         }
 
         public async Task<List<FNBRStoreItem>> GetUpcomingItemsAsync()
         {
             var request = new RestRequest("upcoming/get", Method.GET);
-            request.AddParameter("language", "en");
 
             IRestResponse response = await FNAPI.SendRestRequestAsync(request).ConfigureAwait(false);
             if (response.ResponseStatus != ResponseStatus.Completed)

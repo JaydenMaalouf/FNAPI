@@ -2,21 +2,22 @@
 
 using FortniteAPI.Enums;
 using FortniteAPI.Endpoints.User;
+using FortniteAPI.Endpoints.Stats.Interfaces;
 
 namespace FortniteAPI.Endpoints.Leaderboard.Items
 {
-    public class FNBRLeaderboardItem
+    public class FNBRLeaderboardItem : IFNBRStatsItem
     {
         internal FNBRLeaderboardItem() { }
 
         [JsonProperty]
-        public double Kills { get; internal set; }
+        public int Kills { get; internal set; }
         [JsonProperty]
-        public double Wins { get; internal set; }
+        public int Wins { get; internal set; }
         [JsonProperty("matches")]
-        public double MatchesPlayed { get; internal set; }
+        public int MatchesPlayed { get; internal set; }
         [JsonProperty("minutes")]
-        public double MinutesPlayed { get; internal set; }
+        public int MinutesPlayed { get; internal set; }
         [JsonProperty]
         public double Score { get; internal set; }
         [JsonProperty]

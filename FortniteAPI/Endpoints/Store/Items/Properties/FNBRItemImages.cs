@@ -2,9 +2,9 @@
 
 namespace FortniteAPI.Endpoints.Store.Items
 {
-    public class FNItemImages
+    public class FNBRItemImages
     {
-        internal FNItemImages() { }
+        internal FNBRItemImages() { }
 
         [JsonProperty]
         public string Icon { get; internal set; }
@@ -14,5 +14,8 @@ namespace FortniteAPI.Endpoints.Store.Items
         public string Background { get; internal set; }
         [JsonProperty]
         public string Transparent { get; internal set; }
+
+        [JsonProperty]
+        public FNBRFeaturedItemImages Featured { get; internal set; }
     }
 }

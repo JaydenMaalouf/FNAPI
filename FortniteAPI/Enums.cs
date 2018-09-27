@@ -1,5 +1,11 @@
 ﻿namespace FortniteAPI.Enums
 {
+    public enum FNLanguage
+    {
+        EN,
+        FR
+    }
+
     public enum FNLeaderboardType
     {
         KILLS,

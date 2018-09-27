@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 
 using FortniteAPI;
 using FortniteAPI.Endpoints.Store;
+using FortniteAPI.Enums;
 
 namespace ExampleTest
 {
@@ -11,39 +12,40 @@ namespace ExampleTest
         static void Main(string[] args)
         => new Program().MainAsync().GetAwaiter().GetResult();
 
-        public static FNAPI APi = new FNAPI("VALID API KEY HERE");
+        public static FNAPI API = new FNAPI("VALID API KEY HERE");
 
         public async Task MainAsync()
         {
-            APi.BR.Store.StoreUpdated += StoreUpdated;
+            API.BR.Store.StoreUpdated += StoreUpdated;
+            
+            var season = API.GetCurrentSeason();
+            var week = API.GetCurrentWeek();
+            var version = API.GetCurrentVersion();
+            var status = await API.Status.GetStatusAsync();
+            var patchnotes = await API.Patchnotes.GetPatchnotesAsync();
+            var challenges = await API.BR.Challenges.GetChallengesAsync();
 
-            var season = APi.GetCurrentSeason();
-            var week = APi.GetCurrentWeek();
-            var version = APi.GetCurrentVersion();
-            var status = await APi.Status.GetStatusAsync();
-            var patchnotes = await APi.Patchnotes.GetPatchnotesAsync();
-
-            var store = await APi.BR.Store.GetStoreAsync();
+            var store = await API.BR.Store.GetStoreAsync();
             var featured = store.GetFeaturedStore();
             var daily = store.GetDailyStore();
-            var upcoming = await APi.BR.Store.GetUpcomingItemsAsync();
-            var search = await APi.BR.Store.SearchAsync("Brite Gunner", FortniteAPI.Enums.FNBRItemRarity.EPIC);
+            var upcoming = await API.BR.Store.GetUpcomingItemsAsync();
+            var search = await API.BR.Store.SearchItemAsync("Brite Gunner");
             var searchItem = search[0];
 
-            var item = await APi.BR.Store.GetItemAsync(searchItem.ItemId);
+            var item = await API.BR.Store.GetItemAsync(searchItem.ItemId);
 
-            var user = APi.GetUser("Kangaaa");
+            var user = API.GetUser("Kangaaa");
             var stats = await user.Stats.GetBRStatsAsync();
-            var userUID = APi.GetUser(new UID("711b6eaea0464736ab39212e16ac6c87"));
+            var gameModeStats = await user.Stats.GetBRStatsAsync(FNBRGameMode.ALL);
+            var userUID = API.GetUser(new UID("711b6eaea0464736ab39212e16ac6c87"));
 
-            var leaderboard = await APi.BR.Leaderboard.GetLeaderboardAsync();
+            var leaderboard = await API.BR.Leaderboard.GetLeaderboardAsync();
             var leader = leaderboard[0];
             var lUser = leader.GetUser();
             var lStats = await lUser.Stats.GetBRStatsAsync();
 
-            var brNews = await APi.BR.News.GetNewsAsync();
-            var challenges = await APi.BR.Challenges.GetChallengesAsync();
-            var stwNews = await APi.STW.News.GetNewsAsync();
+            var brNews = await API.BR.News.GetNewsAsync();
+            var stwNews = await API.STW.News.GetNewsAsync();
 
             Console.Read();
         }

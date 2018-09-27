@@ -7,6 +7,6 @@ namespace FortniteAPI.Endpoints.Interfaces
 {
     public interface IChallengesEndpoint
     {
-        Task<FNChallenges> GetChallengesAsync(FNSeason? season = FNSeason.CURRENT);
+        Task<FNChallenges> GetChallengesAsync(FNSeason season = FNSeason.CURRENT);
     }
 }

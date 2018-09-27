@@ -1,12 +1,8 @@
-﻿using System.Drawing;
-
-using Newtonsoft.Json;
-
-using FortniteAPI.Enums;
+﻿using Newtonsoft.Json;
 
 namespace FortniteAPI.Endpoints.Store.Items
 {
-    public class FNBRStoreItem : FNItem
+    public class FNBRStoreItem : FNBRItem
     {
         internal FNBRStoreItem() { }
 
@@ -18,23 +14,14 @@ namespace FortniteAPI.Endpoints.Store.Items
         public bool Refundable { get; internal set; }
 
         [JsonProperty("item")]
-        public FNItemProperties Properties { get; internal set; }
-
-        public Color GetRarityColor()
+        private FNBRItemProperties Properties
         {
-            if (Properties.Rarity == FNBRItemRarity.LEGENDARY)
+            set
             {
-                return Color.FromArgb(211, 120, 65);
+                ItemType = value.ItemType;
+                Rarity = value.Rarity;
+                Images = value.Images;
             }
-            if (Properties.Rarity == FNBRItemRarity.EPIC)
-            {
-                return Color.FromArgb(177, 91, 226);
-            }
-            if (Properties.Rarity == FNBRItemRarity.RARE)
-            {
-                return Color.FromArgb(73, 172, 242);
-            }
-            return Color.FromArgb(96, 170, 58);
         }
     }
 }

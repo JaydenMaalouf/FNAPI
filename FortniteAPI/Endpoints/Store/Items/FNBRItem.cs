@@ -3,11 +3,10 @@
 using Newtonsoft.Json;
 
 using FortniteAPI.Enums;
-using FortniteAPI.Interfaces;
 
 namespace FortniteAPI.Endpoints.Store.Items
 {
-    public class FNBRItem : FNItem, IFNItemProperties
+    public class FNBRItem : FNItem, IFNBRItemProperties
     {
         internal FNBRItem() { }
 
@@ -17,9 +16,10 @@ namespace FortniteAPI.Endpoints.Store.Items
         public FNBRItemRarity Rarity { get; internal set; }
 
         [JsonProperty]
-        public FNItemImages Images { get; internal set; }
+        public FNBRItemImages Images { get; internal set; }
+
         [JsonProperty]
-        public FNBRItemOccurrences Occurences { get; internal set; }
+        public FNBRItemOccurrences Occurrences { get; internal set; }
 
         public Color GetRarityColor()
         {
@@ -41,17 +41,5 @@ namespace FortniteAPI.Endpoints.Store.Items
             }
             return Color.FromArgb(177, 177, 177);
         }
-    }
-
-    public class FNBRItemOccurrenceEntry
-    {
-        internal FNBRItemOccurrenceEntry() { }
-
-        [JsonProperty]
-        public string Date { get; internal set; }
-        [JsonProperty]
-        public int Cost { get; internal set; }
-        [JsonProperty]
-        public bool Featured { get; internal set; }
     }
 }
