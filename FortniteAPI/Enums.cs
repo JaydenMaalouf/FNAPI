@@ -26,6 +26,14 @@
         BR
     }
 
+    public enum FNBRGameMode
+    {
+        ALL,
+        SOLO,
+        DUO,
+        SQUAD
+    }
+
     public enum FNStoreType
     {
         FEATURED,

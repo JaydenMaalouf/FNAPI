@@ -35,7 +35,11 @@ namespace FortniteAPI.Endpoints.Store.Items
             {
                 return Color.FromArgb(73, 172, 242);
             }
-            return Color.FromArgb(96, 170, 58);
+            if (Rarity == FNBRItemRarity.UNCOMMON)
+            {
+                return Color.FromArgb(96, 170, 58);
+            }
+            return Color.FromArgb(177, 177, 177);
         }
     }
 

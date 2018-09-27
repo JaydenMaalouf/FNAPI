@@ -19,15 +19,12 @@ namespace FortniteAPI.Endpoints.Stats
             UserId = _user.UserId;
         }
 
-        public async Task<FNBRStats> GetBRStatsAsync(FNPlatform platform = FNPlatform.PC, FNStatWindow? window = null)
+        public async Task<FNBRStats> GetBRStatsAsync(FNPlatform platform = FNPlatform.PC, FNStatWindow window = FNStatWindow.ALLTIME)
         {
             var request = new RestRequest("users/public/br_stats", Method.GET);
             request.AddParameter("user_id", UserId.UIDToString());
             request.AddParameter("platform", platform.ToString().ToLower());
-            if (window != null)
-            {
-                request.AddParameter("window", window.ToString().ToLower());
-            }
+            request.AddParameter("window", window.ToString().ToLower());
 
             IRestResponse response = await FNAPI.SendRestRequestAsync(request).ConfigureAwait(false);
             if (response.ResponseStatus != ResponseStatus.Completed)
@@ -42,6 +39,22 @@ namespace FortniteAPI.Endpoints.Stats
             }
 
             return new FNBRStats(tempUser);
+        }
+
+        public async Task<FNBRStatsItem> GetBRStatsAsync(FNPlatform platform = FNPlatform.PC, FNStatWindow window = FNStatWindow.ALLTIME, FNBRGameMode gameMode = FNBRGameMode.ALL)
+        {
+            var stats = await GetBRStatsAsync(platform, window);
+
+            switch (gameMode)
+            {
+                case FNBRGameMode.SOLO:
+                    return stats.Solo;
+                case FNBRGameMode.DUO:
+                    return stats.Duo;
+                case FNBRGameMode.SQUAD:
+                    return stats.Squad;
+            }
+            return stats.Overall;
         }
     }
 }
