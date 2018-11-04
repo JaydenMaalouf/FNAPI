@@ -22,7 +22,7 @@ namespace FortniteAPI.Endpoints.Stats
         public async Task<FNBRStats> GetBRStatsAsync(FNPlatform platform = FNPlatform.PC, FNStatWindow window = FNStatWindow.ALLTIME)
         {
             var request = new RestRequest("users/public/br_stats", Method.GET);
-            request.AddParameter("user_id", UserId.UIDToString());
+            request.AddParameter("user_id", UserId.ToString());
             request.AddParameter("platform", platform.ToString().ToLower());
             request.AddParameter("window", window.ToString().ToLower());
 

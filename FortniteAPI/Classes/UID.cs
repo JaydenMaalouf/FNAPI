@@ -11,7 +11,7 @@ public class UID
         uid = _uid;
     }
 
-    public string UIDToString()
+    public override string ToString()
     {
         return uid;
     }
@@ -26,7 +26,7 @@ public class UIDConverter : JsonConverter
 
     public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
     {
-        return new UID((string)reader.Value);
+        return new UID(Convert.ToString(reader.Value));
     }
 
     public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)

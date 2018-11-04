@@ -56,7 +56,7 @@ namespace FortniteAPI.Endpoints.User
         public FNUser(UID UniqueId)
         {
             var request = new RestRequest("users/username out of id", Method.GET);
-            request.AddParameter("ids[0]", UniqueId.UIDToString());
+            request.AddParameter("ids[0]", UniqueId.ToString());
             IRestResponse response = FNAPI.SendRestRequestAsync(request).Result;
             if (response.ResponseStatus != ResponseStatus.Completed)
             {
